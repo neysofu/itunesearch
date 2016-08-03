@@ -10,7 +10,7 @@ with open('LICENSE.txt') as f:
 
 setup(
     name='itunesearch',
-    version=0.1,
+    version=0.2,
     description='A Python library for surfing the iTunes Store.',
     long_description=readme,
     author='Filippo Costa',
