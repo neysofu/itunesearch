@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
-from .core import Request, Application, GenericItem
+from .core import Request, Application, MediaItem
 from .exceptions import MalformedRequestError, UnavailableInformationError
 from .media import Artist, Song
+
 
 __title__ = 'itunesearch'
 __version__ = '0.1.0'

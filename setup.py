@@ -18,4 +18,4 @@ setup(
     license=license,
     url='https://github.com/neysofu/itunesearch',
     install_requires=['requests','bs4'],
-    packages=['itunesearch-src'])
+    packages=['itunesearch'])

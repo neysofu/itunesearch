@@ -1,8 +1,16 @@
 # -*- coding: utf-8 -*-
 import requests
 import functools
-import itunesearch.errors
-from .media import CLASSIFIER
+from .exceptions import MalformedRequestError, UnavailableInformationError
+
+
+class MediaItem:
+
+    def __init__(self, json_data):
+        self.json = json_data
+
+    def get_type(self):
+        return self.json.get('kind', self.json.get('wrapperType', None))
 
 
 class Request:
