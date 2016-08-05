@@ -1,5 +1,7 @@
 # iTunesearch
-iTunesearch is a fully fledged API wrapper for surfing the iTunes Store. It provides a clean and simple interface.
+iTunesearch is a mature and robust Python library for interfacing with the iTunes Store. The software combines both web scraping techniques and API wrapping utilities to replace the poorly engineered [iTunes Search API] (v2).
+
+![artworks showcase](http://img.wallpaperfolder.com/f/7B953CCF3960/itunes-artwork-zoom-album-covers.jpg)
 
 ## Features
 - A customizable `Media` class, with callbacks and other advanced object oriented features.
@@ -7,8 +9,6 @@ iTunesearch is a fully fledged API wrapper for surfing the iTunes Store. It prov
 - Descriptive and comprehensive documentation.
 - Support for both `search` and `lookup` actions.
 - High-quality, official iTunes
-
-![artworks showcase](http://img.wallpaperfolder.com/f/7B953CCF3960/itunes-artwork-zoom-album-covers.jpg)
 
 Every store item is just one click away.
 
