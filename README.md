@@ -1,7 +1,7 @@
 # iTunesearch
 iTunesearch is a mature and robust Python library for interfacing with the iTunes Store. The software combines both web scraping techniques and API wrapping utilities to replace the poorly engineered [iTunes Search API] (v2).
 
-![artworks showcase](http://i.stack.imgur.com/uuZjT.jpg)
+![artworks showcase](http://i.stack.imgur.com/85oYe.png)
 
 ## Features
 - A customizable `Media` class, with callbacks and other advanced object oriented features.
