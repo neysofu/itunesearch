@@ -3,19 +3,20 @@ from setuptools import setup
 
 
 with open('README.md') as f:
-    readme = f.read()
+    README = f.read()
 
 with open('LICENSE.txt') as f:
-    license = f.read()
+    LICENSE = f.read()
+
 
 setup(
     name='itunesearch',
-    version=0.2,
+    version=0.3,
     description='A Python library for surfing the iTunes Store.',
-    long_description=readme,
+    long_description=README,
     author='Filippo Costa',
     author_email='filippocosta.italy@gmail.com',
-    license=license,
+    license=LICENSE,
     url='https://github.com/neysofu/itunesearch',
-    install_requires=['requests','bs4'],
-    packages=['itunesearch'])
+    install_requires=['requests'],
+    packages=['itunesearch-src'])

@@ -1,48 +1,21 @@
 # -*- coding: utf-8 -*-
 import requests
 import functools
-from .exceptions import MalformedRequestError, UnavailableInformationError
+from . import media
+from . import utils
 
 
-class MediaItem:
+HOSTNAME = 'http://itunes.apple.com/'
 
-    def __init__(self, json_data):
-        self.json = json_data
-
-    def get_type(self):
-        return self.json.get('kind', self.json.get('wrapperType', None))
+SEARCH_HOSTNAME = HOSTNAME + 'search'
+LOOKUP_HOSTNAME = HOSTNAME + 'lookup'
 
 
-class Request:
-
-    def __init__(self, url, parameters):
-        self.url = url
-        self.params = parameters
-        self.response = self.get_response()
-
-    def get_response(self):
-        return requests.get(self.url, self.params).json()
-
-    def is_erraneus(self):
-        return 'errorMessage' in self.response
-
-    def error_pipeline(self):
-        if self.is_erraneus():
-            raise MalformedRequestError(self.response['errorMessage'])
-
-    def list_results(self):
-        self.error_pipeline()
-        for result in self.response['results']:
-            classtype = result.get('kind', result.get('wrapperType', None))
-            yield CLASSIFIER(classtype)(result)
+class MalformedRequestError(Exception):
+    pass
 
 
 class Application:
-
-    HOSTNAME = 'http://itunes.apple.com/'
-
-    SEARCH_HOSTNAME = HOSTNAME + 'search'
-    LOOKUP_HOSTNAME = HOSTNAME + 'lookup'
 
     def search(term, country=None, media=None, entity=None, attribute=None,
                limit=None, lang=None, explicit=None):
@@ -80,10 +53,12 @@ class Application:
         parameters = {k:v for (k,v) in locals().items() if v != None}
         if not('explicit'):
             parameters['explicit'] = 'no'
-        return Request(Application.SEARCH_HOSTNAME, parameters)
+        response = requests.get(SEARCH_HOSTNAME, parameters).json()
+        return utils.list_results(response)
 
     def lookup(itunes_id):
-        return Request(Application.LOOKUP_HOSTNAME, {'id':itunes_id})
+        response = requests.get(LOOKUP_HOSTNAME, parameters).json()
+        return utils.list_results(response)
 
-    #search_artist = functools.partial(self.search, entity='allArtist')
-    #search_song = functools.partial(self.search, entity='song')
+    search_artist = functools.partial(search, entity='allArtist')
+    search_song = functools.partial(search, entity='song')

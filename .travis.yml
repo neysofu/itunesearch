@@ -1,0 +1,10 @@
+language: python
+python:
+  - "3.2"
+  - "3.3"
+  - "3.4"
+  - "3.5"
+before_install:
+  - sudo apt-get -qq update
+install:
+  - python3 setup.py install
