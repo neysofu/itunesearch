@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
-from setuptools import setup
-
+from setuptools import setup, find_packages
 
 with open('README.md') as f:
     README = f.read()
@@ -8,10 +7,9 @@ with open('README.md') as f:
 with open('LICENSE.txt') as f:
     LICENSE = f.read()
 
-
 setup(
     name='itunesearch',
-    version=0.3,
+    version=0.4,
     description='A Python library for surfing the iTunes Store.',
     long_description=README,
     author='Filippo Costa',
@@ -19,4 +17,4 @@ setup(
     license=LICENSE,
     url='https://github.com/neysofu/itunesearch',
     install_requires=['requests'],
-    packages=['itunesearch-src'])
+	packages=find_packages(exclude=('tests', 'docs')) )
