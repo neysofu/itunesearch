@@ -2,8 +2,8 @@ import unittest
 import itunesearch
 import random
 
-TRACK_QUERY = 'Rolling in the Deep'
-COLLECTION_QUERY = '21'
+TRACK_QUERY = 'Hello'
+COLLECTION_QUERY = '25'
 AUTHOR_QUERY = 'Adele'
 
 TRACK = itunesearch.search(TRACK_QUERY)[0]
