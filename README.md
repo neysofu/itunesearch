@@ -9,7 +9,7 @@ iTunesearch is a mature and robust Python wrapper for the [infamous](https://med
 Behold, the power of iTunesearch:
 
     >>> import itunesearch
-	>>> happy = itunesearch.search_track("Happy")
+	>>> happy = itunesearch.search_track('Happy')
 	>>> happy.get_price()
 	(1.29, 'USD')
 	>>> happy.grab_author().get_name()
