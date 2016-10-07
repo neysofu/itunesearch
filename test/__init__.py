@@ -2,17 +2,16 @@ import unittest
 import itunesearch
 import random
 
-# Global variables
-# ----------------
-
 TRACK_QUERY = 'Rolling in the Deep'
 COLLECTION_QUERY = '21'
 AUTHOR_QUERY = 'Adele'
 
-
 TRACK = itunesearch.search(TRACK_QUERY)[0]
 COLLECTION = itunesearch.search(COLLECTION_QUERY)[0]
 AUTHOR = itunesearch.search(AUTHOR_QUERY)[0]
+
+# Test suit
+# ---------
 
 class TestMedia(unittest.TestCase):
 	
@@ -26,6 +25,10 @@ class TestMedia(unittest.TestCase):
 		TRACK.is_explicit()
 		self.assertTrue(True)
 
+	def test_Collection(self):
+		COLLECTION.response
+		self.assertTrue(True)
+	
 	def test_search_song(self):
 		test_track = itunesearch.search_song(TRACK_QUERY)[0]
 		self.assertTrue(test_track.response == TRACK.response)

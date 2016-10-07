@@ -45,7 +45,9 @@ class Track(Item):
 		return core.lookup(self['collectionId'])
 
 class Collection(Item):
-	pass
+	
+	def __init__(self, response):
+		Item.__init__(self, response)
 
 class Author(Item):
 		
