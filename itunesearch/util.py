@@ -27,5 +27,5 @@ def wrapper_class(response):
 def list_results(response):
 	msg = 'errorMessage'
 	if msg in response:
-		raise MalformedRequestError(response[wrap])
+		raise MalformedRequestError(response[msg])
 	return [wrapper_class(r) for r in response['results']]

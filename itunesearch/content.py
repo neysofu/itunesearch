@@ -22,12 +22,12 @@ class Track(Item):
 	def __init__(self, response):
 		Item.__init__(self, response)
 
+	def get_artwork(self, resolution=256):
+		return self['artworkUrl60'].replace('60x60', '{0}x{0}'.format(resolution))
+	
 	def get_duration(self, readable=False):
-		duration = timedelta(milliseconds=self['trackTimeMillis'])
+		duration = timedelta(seconds=self['trackTimeMillis']//1000)
 		return str(duration) if readable else duration
-
-	def is_explicit(self):
-		return self['trackExplicitness'] == 'explicit'
 
 	def get_id(self):
 		return self['trackId']
@@ -43,11 +43,26 @@ class Track(Item):
 
 	def grab_collection(self):
 		return core.lookup(self['collectionId'])
+	
+	def is_explicit(self):
+		return 'not' not in self['trackExplicitness']
 
 class Collection(Item):
 	
 	def __init__(self, response):
 		Item.__init__(self, response)
+
+	def get_artwork(self, resolution=256):
+		return self['artworkUrl60'].replace('60x60', '{0}x{0}'.format(resolution))
+
+	def get_name(self, censored=False):
+		return self['collectionNameCensored'] if censored else self['collectionName']
+
+	def grab_author(self):
+		return core.lookup(self['artistId'])
+
+	def is_explicit(self):
+		return self['trackExplicitness'] == 'explicit'
 
 class Author(Item):
 		

@@ -56,5 +56,6 @@ def lookup(itunes_id):
 	response = requests.get(LOOKUP_HOSTNAME, {'id':itunes_id}).json()
 	return util.list_results(response)[0]
 
-search_artist = functools.partial(search, entity='allArtist')
-search_song = functools.partial(search, entity='song')
+search_author = functools.partial(search, entity='allArtist')
+search_collection = functools.partial(search, entity='album')
+search_track = functools.partial(search, entity='allTrack')

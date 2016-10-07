@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from . import util
-from .core import search, lookup, search_artist, search_song
+from .core import search, lookup, search_author, search_collection, search_track
 from .content import Track, Collection, Author
 
 __name__ = 'itunesearch'
