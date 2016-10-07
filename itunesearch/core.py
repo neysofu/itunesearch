@@ -18,7 +18,7 @@ def search(term, country=None, media=None, entity=None, attribute=None,
 		   limit=None, lang=None, explicit=None):
     '''
     Sends a ``GET`` request to the iTunes Search API with the selected
-	parameters and performs.
+	parameters and returns an object wrapper to the JSON response.
 
     :param term:
        The text string you want to search for, e.g., ``'jack johnson'``.
