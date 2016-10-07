@@ -14,6 +14,7 @@ class DefectiveResponseError(Exception):
 # -------
 
 def wrapper_class(response):
+	# Nothing can describe the feelings `wrapperType` and `kind` cause
 	wrap = 'wrapperType'
 	if wrap in response:
 		return {

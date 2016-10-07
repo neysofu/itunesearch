@@ -62,7 +62,7 @@ class Collection(Item):
 		return core.lookup(self['artistId'])
 
 	def is_explicit(self):
-		return self['trackExplicitness'] == 'explicit'
+		return 'not' not in self['trackExplicitness']
 
 class Author(Item):
 		

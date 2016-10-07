@@ -20,18 +20,18 @@ class TestMedia(unittest.TestCase):
 		self.assertTrue(TRACK.get_duration(True) == '0:04:55')
 		self.assertTrue(TRACK.get_id() == 1051394215)
 		self.assertTrue(TRACK.get_name() == TRACK_QUERY)
-		self.assertTrue(TRACK.get_price() != None)
+		self.assertTrue(TRACK.get_price() == (1.29, 'USD'))
 		self.assertTrue(TRACK.grab_author().response == AUTHOR.response)
 		self.assertTrue(TRACK.grab_collection().response == COLLECTION.response)
 		self.assertTrue(not(TRACK.is_explicit()))
 
 	def test_Collection(self):
-		COLLECTION.response
+		self.assertTrue('256x256' in COLLECTION.get_artwork())
+		self.assertTrue(COLLECTION.get_name() == COLLECTION_QUERY)
 		self.assertTrue(True)
-	
-	def test_search_song(self):
-		test_track = itunesearch.search_track(TRACK_QUERY)[0]
-		self.assertTrue(test_track.response == TRACK.response)
 
+	def test_Author(self):
+		self.assertTrue(str(AUTHOR.get_id()) in AUTHOR.get_store_url())
+	
 if __name__ == '__main__':
 	unittest.main()
