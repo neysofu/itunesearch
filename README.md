@@ -8,7 +8,7 @@ iTunesearch is a mature and robust Python wrapper for the [infamous](https://med
 
     git clone https://github.com/neysofu/itunesearch.git
 	cd itunesearch
-	pip setup.py install
+	python setup.py install
 
 Behold, the power of iTunesearch:
 
