@@ -66,6 +66,9 @@ class Collection(Item):
 
 class Author(Item):
 		
+	def __init__(self, response):
+		Item.__init__(self, response)
+	
 	def get_name(self):
 		return self['artistName']
 

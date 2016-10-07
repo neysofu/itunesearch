@@ -22,7 +22,7 @@ class TestMedia(unittest.TestCase):
 		self.assertTrue(TRACK.get_name() == TRACK_QUERY)
 		self.assertTrue(TRACK.get_price() != None)
 		self.assertTrue(TRACK.grab_author().response == AUTHOR.response)
-		#self.assertTrue(TRACK.grab_collection().response == COLLECTION.response)
+		self.assertTrue(TRACK.grab_collection().response == COLLECTION.response)
 		self.assertTrue(not(TRACK.is_explicit()))
 
 	def test_Collection(self):
