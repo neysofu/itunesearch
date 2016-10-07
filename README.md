@@ -1,21 +1,29 @@
 # iTunesearch
-iTunesearch is a ~~mature and robust~~ work-in-progress and unstable Python library for interfacing with the iTunes Store. The software combines both web scraping techniques and API wrapping utilities to replace the poorly engineered [iTunes Search API] (v2).
+
+![build](https://travis-ci.org/neysofu/itunesearch.svg?branch=master)
+![license](https://img.shields.io/badge/license-MIT-blue.svg)
+![status](https://img.shields.io/badge/maintained-yes-orange.svg)
+
+iTunesearch is a mature and robust Python wrapper for the [infamous](https://medium.com/@ftxdri/the-itunes-api-the-epitome-of-bad-api-design-b83a9ac41132#.ka9dfyzd3) iTunes Search APIs. It features support for both `search` and `lookup` actions, comprehensive testing suits, and more.
+
+    git clone https://github.com/neysofu/itunesearch.git
+	cd itunesearch
+	pip setup.py install
+
+Behold, the power of iTunesearch:
+
+    >>> import itunesearch
+	>>> happy = itunesearch.search_track("Happy")
+	>>> happy.get_price()
+	(1.29, 'USD')
+	>>> happy.grab_author().get_name()
+	'Pharrell Williams'
 
 ![artworks showcase](http://i.stack.imgur.com/vR2sL.png)
 
-## Features
-- A customizable `Media` class, with callbacks and other advanced object oriented features.
-- Robust and clean interface, no frills.
-- Descriptive and comprehensive documentation.
-- Support for both `search` and `lookup` actions.
-- High-quality, official iTunes
+## Future enhancements
 
-Every store item is just one click away.
+ - [] Make backward compatibility changes to fully support Python 2.7+.
+ - [] Write a descriptive, *up-to-date* dcoumentation.
+ - [] Add support for `Book` and `Software` store items.
 
-```
-import itunesearch
-app = itunesearch.Application
-
-song = app.search_song('Adele')[0]
-print(song.get_track_name())
-```
