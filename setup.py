@@ -1,20 +1,25 @@
 # -*- coding: utf-8 -*-
 from setuptools import setup, find_packages
+import itunesearch
+
+# External resources
+# ------------------
 
 with open('README.md') as f:
     README = f.read()
 
-with open('LICENSE.txt') as f:
-    LICENSE = f.read()
+with open('requirements.txt') as f:
+	REQUIREMENTS = f.readlines()
 
 setup(
-    name='itunesearch',
-    version=0.4,
-    description='A Python library for surfing the iTunes Store.',
+    name=itunesearch.__name__,
+    version=itunesearch.__version__,
+    description='A majestic Python wrapper for the dreadful iTunes Search APIs.',
     long_description=README,
-    author='Filippo Costa',
-    author_email='filippocosta.italy@gmail.com',
-    license=LICENSE,
+    author=itunesearch.__author__,
+    author_email=itunesearch.__email__,
     url='https://github.com/neysofu/itunesearch',
-    install_requires=['requests'],
-	packages=find_packages(exclude=('tests', 'docs')) )
+    license=itunesearch.__license__,
+	install_requires=REQUIREMENTS,
+	packages=find_packages(),
+	test_suite='test' )

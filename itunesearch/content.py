@@ -12,7 +12,7 @@ class Item:
 		try:
 			return self.response[item]
 		except IndexError:
-			raise InfoLackError
+			raise util.DefectiveResponseError
 
 # Subclasses
 # ----------
@@ -42,7 +42,7 @@ class Track(Item):
 		return core.lookup(self['artistId'])
 
 	def grab_collection(self):
-		return core.lookup(self['albumId'])
+		return core.lookup(self['collectionId'])
 
 class Collection(Item):
 	pass
@@ -57,6 +57,3 @@ class Author(Item):
 
 	def get_store_url(self):
 		return self['artistLinkUrl']
-
-	def grab_genre(self):
-		return core.Application.lookup(self['primaryGenreId'])
