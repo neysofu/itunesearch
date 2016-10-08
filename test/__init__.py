@@ -1,48 +1,73 @@
 import unittest
 import itunesearch
+import datetime
 import random
 
-TRACK_QUERY = 'Hello'
-COLLECTION_QUERY = '25'
-AUTHOR_QUERY = 'Adele'
+TRACK_QUERY, COLLECTION_QUERY, AUTHOR_QUERY = random.choice([
+	['When We Were Young', '25', 'Adele'],
+	['On Top of the World', 'Night Visions', 'Imagine Dragons'],
+	['Hymn for the Weekend', 'A Head Full of Dreams', 'Coldplay'] ])
 
 TRACK = itunesearch.search_track(TRACK_QUERY)[0]
 COLLECTION = itunesearch.search_collection(COLLECTION_QUERY)[0]
 AUTHOR = itunesearch.search_author(AUTHOR_QUERY)[0]
 
-# Test suit
-# ---------
+# Test suits
+# ----------
 
 class TestTrack(unittest.TestCase):
 	
 	def test_get_artwork(self):
-		self.assertIn('256x256', TRACK.get_artwork())
+		n = random.randrange(30, 100)
+		pattern = '{0}x{0}bb'.format(n)
+		url = TRACK.get_artwork(resolution=n)
+		self.assertIn(pattern, url)
+
+	def test_get_country(self):
+		self.assertIsInstance(TRACK.get_country(), str)
 
 	def test_get_duration(self):
-		self.assertEqual(TRACK.get_duration(True), '0:04:55')
+		self.assertIsInstance(TRACK.get_duration(), datetime.timedelta)
 	
 	def test_get_id(self):
-		self.assertEqual(TRACK.get_id(), 1051394215)
+		self.assertIsInstance(TRACK.get_id(), int)
 	
 	def test_get_name(self):
 		self.assertEqual(TRACK.get_name(), TRACK_QUERY)
-		
+	
+	def test_get_preview_url(self):
+		self.assertIsInstance(TRACK.get_preview_url(), str)
+
 	def test_get_price(self):
-		self.assertEqual(TRACK.get_price(), (1.29, 'USD'))
-		
+		self.assertIsInstance(TRACK.get_price()[0], float)
+		self.assertIsInstance(TRACK.get_price()[1], str)
+
+	def test_get_release_date(self):
+		self.assertIsInstance(TRACK.get_release_date(), datetime.datetime)
+
+	def test_get_track_number(self):
+		self.assertIsInstance(TRACK.get_track_number()[0], int)
+		self.assertIsInstance(TRACK.get_track_number()[1], int)
+
+	def test_get_view_url(self):
+		self.assertIsInstance(TRACK.get_view_url(), str)
+
 	def test_grab_author(self):
-		self.assertIsInstance(TRACK.grab_author(), itunesearch.Author)
+		self.assertEqual(TRACK.grab_author(), AUTHOR)
 
 	def test_grab_collection(self):
-		self.assertIsInstance(TRACK.grab_collection(), itunesearch.Collection)
+		self.assertEqual(TRACK.grab_collection(), COLLECTION)
 		
 	def test_is_explicit(self):
-		self.assertFalse(TRACK.is_explicit())
+		self.assertIsInstance(TRACK.is_explicit(), bool)
 
 class TestCollection(unittest.TestCase):
 
 	def test_get_artwork(self):
-		self.assertIn('256x256', COLLECTION.get_artwork())
+		n = random.randrange(30, 100)
+		pattern = '{0}x{0}bb'.format(n)
+		url = COLLECTION.get_artwork(resolution=n)
+		self.assertIn(pattern, url)
 		
 	def test_get_name(self):
 		self.assertEqual(COLLECTION.get_name(), COLLECTION_QUERY)

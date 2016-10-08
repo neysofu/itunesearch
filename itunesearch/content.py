@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from datetime import timedelta
+import datetime
 from . import core
 from . import util
 
@@ -8,6 +8,9 @@ class Item:
 	def __init__(self, response):
 		self.response = response
 
+	def __eq__(self, that):
+		return self.response == that.response
+	
 	def __getitem__(self, item):
 		try:
 			return self.response[item]
@@ -24,10 +27,12 @@ class Track(Item):
 
 	def get_artwork(self, resolution=256):
 		return self['artworkUrl60'].replace('60x60', '{0}x{0}'.format(resolution))
-	
+
+	def get_country(self):
+		return self['country']
+
 	def get_duration(self, readable=False):
-		duration = timedelta(seconds=self['trackTimeMillis']//1000)
-		return str(duration) if readable else duration
+		return datetime.timedelta(milliseconds=self['trackTimeMillis'])
 
 	def get_id(self):
 		return self['trackId']
@@ -35,11 +40,22 @@ class Track(Item):
 	def get_name(self, censored=False):
 		return self['trackNameCensored'] if censored else self['trackName']
 
+	def get_preview_url(self):
+		return self['previewUrl']
+
 	def get_price(self):
 		return self['trackPrice'], self['currency']
 
+	def get_release_date(self):
+		return datetime.datetime.strptime(
+			self['releaseDate'],
+			'%Y-%m-%dT%H:%M:%SZ' )
+
 	def get_track_number(self):
-		return self['trackNumber']
+		return self['discNumber'], self['trackNumber']
+
+	def get_view_url(self):
+		return self['trackViewUrl']
 
 	def grab_author(self):
 		return core.lookup(self['artistId'])
