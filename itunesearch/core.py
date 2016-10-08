@@ -21,10 +21,10 @@ def search(term, country=None, media=None, entity=None, attribute=None,
 	parameters and returns an object wrapper to the JSON response.
 
     :param term:
-       The text string you want to search for, e.g., ``'jack johnson'``.
+       The text string you want to search for; e.g., ``'jack johnson'``.
 	:param country:
-        The ``ISO 3166-1-alpha-2`` country code for the store you want to
-		search, e.g., ``'FR'``.
+        The ``ISO 3166-1 alpha-2`` country code of the store you want to
+		search for; e.g., ``'FR'``.
     :param media:
 	    The media type you want to search for, e.g., ``'movie'``.
 	:param entity:

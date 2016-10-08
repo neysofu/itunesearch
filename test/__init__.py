@@ -13,25 +13,44 @@ AUTHOR = itunesearch.search_author(AUTHOR_QUERY)[0]
 # Test suit
 # ---------
 
-class TestMedia(unittest.TestCase):
+class TestTrack(unittest.TestCase):
 	
-	def test_Track(self):
-		self.assertTrue('256x256' in TRACK.get_artwork())
-		self.assertTrue(TRACK.get_duration(True) == '0:04:55')
-		self.assertTrue(TRACK.get_id() == 1051394215)
-		self.assertTrue(TRACK.get_name() == TRACK_QUERY)
-		self.assertTrue(TRACK.get_price() == (1.29, 'USD'))
-		self.assertTrue(TRACK.grab_author().response == AUTHOR.response)
-		self.assertTrue(TRACK.grab_collection().response == COLLECTION.response)
-		self.assertTrue(not(TRACK.is_explicit()))
+	def test_get_artwork(self):
+		self.assertIn('256x256', TRACK.get_artwork())
 
-	def test_Collection(self):
-		self.assertTrue('256x256' in COLLECTION.get_artwork())
-		self.assertTrue(COLLECTION.get_name() == COLLECTION_QUERY)
-		self.assertTrue(True)
+	def test_get_duration(self):
+		self.assertEqual(TRACK.get_duration(True), '0:04:55')
+	
+	def test_get_id(self):
+		self.assertEqual(TRACK.get_id(), 1051394215)
+	
+	def test_get_name(self):
+		self.assertEqual(TRACK.get_name(), TRACK_QUERY)
+		
+	def test_get_price(self):
+		self.assertEqual(TRACK.get_price(), (1.29, 'USD'))
+		
+	def test_grab_author(self):
+		self.assertIsInstance(TRACK.grab_author(), itunesearch.Author)
 
-	def test_Author(self):
-		self.assertTrue(str(AUTHOR.get_id()) in AUTHOR.get_store_url())
+	def test_grab_collection(self):
+		self.assertIsInstance(TRACK.grab_collection(), itunesearch.Collection)
+		
+	def test_is_explicit(self):
+		self.assertFalse(TRACK.is_explicit())
+
+class TestCollection(unittest.TestCase):
+
+	def test_get_artwork(self):
+		self.assertIn('256x256', COLLECTION.get_artwork())
+		
+	def test_get_name(self):
+		self.assertEqual(COLLECTION.get_name(), COLLECTION_QUERY)
+	
+class TestAuthor(unittest.TestCase):
+
+	def test_get_id_get_view_url(self):
+		self.assertIn(str(AUTHOR.get_id()), AUTHOR.get_view_url())
 	
 if __name__ == '__main__':
 	unittest.main()

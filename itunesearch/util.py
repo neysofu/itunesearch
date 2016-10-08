@@ -20,10 +20,11 @@ def wrapper_class(response):
 		return {
 			'track' : content.Track,
 			'collection' : content.Collection,
-			'artist' : content.Author
+			'artist' : content.Author,
+			'audiobook' : content.Audiobook
 		}[response[wrap]](response)
 	else: # ... you are pretty much fucked
-		pass
+		raise DefectiveResponseError
 
 def list_results(response):
 	msg = 'errorMessage'
