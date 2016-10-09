@@ -1,3 +1,4 @@
+#!/usr/bin/python3.4.1
 import unittest
 import itunesearch
 import datetime
@@ -28,7 +29,10 @@ class TestTrack(unittest.TestCase):
 
 	def test_get_duration(self):
 		self.assertIsInstance(TRACK.get_duration(), datetime.timedelta)
-	
+
+	def test_get_genre(self):
+		self.assertIsInstance(TRACK.get_genre(), str)
+
 	def test_get_id(self):
 		self.assertIsInstance(TRACK.get_id(), int)
 	
@@ -68,14 +72,26 @@ class TestCollection(unittest.TestCase):
 		pattern = '{0}x{0}bb'.format(n)
 		url = COLLECTION.get_artwork(resolution=n)
 		self.assertIn(pattern, url)
-		
+	
+	def test_get_country(self):
+		self.assertIsInstance(COLLECTION.get_genre(), str)
+
 	def test_get_name(self):
 		self.assertEqual(COLLECTION.get_name(), COLLECTION_QUERY)
-	
+
+	def test_get_id(self):
+		self.assertIn(str(COLLECTION.get_id()), COLLECTION.get_view_url())
+
+	def test_grab_author(self):
+		self.assertEqual(COLLECTION.grab_author(), AUTHOR)
+
+	def test_is_explicit(self):
+		self.assertIsInstance(COLLECTION.is_explicit(), bool)
+
 class TestAuthor(unittest.TestCase):
 
-	def test_get_id_get_view_url(self):
-		self.assertIn(str(AUTHOR.get_id()), AUTHOR.get_view_url())
+	def test_get_view_url(self):
+		self.assertIsInstance(AUTHOR.get_view_url(), str)
 	
 if __name__ == '__main__':
 	unittest.main()

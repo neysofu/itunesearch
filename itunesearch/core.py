@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import requests
 import functools
-from . import util
+import itunesearch.util 
 
 # Global variables
 # ----------------
@@ -10,6 +10,24 @@ HOSTNAME = 'http://itunes.apple.com/'
 
 SEARCH_HOSTNAME = HOSTNAME + 'search'
 LOOKUP_HOSTNAME = HOSTNAME + 'lookup'
+
+# Superclass
+# ----------
+
+class Item:
+
+	def __init__(self, response, entity):
+		self.response = response
+		self.entity = entity
+
+	def __eq__(self, that):
+		return self.response == that.response
+	
+	def __getitem__(self, item):
+		try:
+			return self.response[item]
+		except KeyError:
+			raise itunesearch.util.DefectiveResponseError from None
 
 # Public API
 # ----------
@@ -50,11 +68,11 @@ def search(term, country=None, media=None, entity=None, attribute=None,
     if not('explicit'):
         parameters['explicit'] = 'no'
     response = requests.get(SEARCH_HOSTNAME, parameters).json()
-    return util.list_results(response)
+    return itunesearch.util.list_results(response)
 
 def lookup(itunes_id):
 	response = requests.get(LOOKUP_HOSTNAME, {'id':itunes_id}).json()
-	return util.list_results(response)[0]
+	return itunesearch.util.list_results(response)[0]
 
 search_author = functools.partial(search, entity='allArtist')
 search_collection = functools.partial(search, entity='album')

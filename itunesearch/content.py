@@ -1,134 +1,55 @@
 # -*- coding: utf-8 -*-
-import datetime
-from . import core
-from . import util
+import itunesearch.core as itc
+from itunesearch import traits
 
-class Item:
-
-	def __init__(self, response):
-		self.response = response
-
-	def __eq__(self, that):
-		return self.response == that.response
-	
-	def __getitem__(self, item):
-		try:
-			return self.response[item]
-		except IndexError:
-			raise util.DefectiveResponseError
 
 # Subclasses
 # ----------
 
-class Track(Item):
+class Track(
+		itc.Item,
+		traits.Music,
+		traits.Streamable,
+		traits.Purchasable):
 
 	def __init__(self, response):
-		Item.__init__(self, response)
-
-	def get_artwork(self, resolution=256):
-		return self['artworkUrl60'].replace('60x60', '{0}x{0}'.format(resolution))
+		super().__init__(response, 'track')
 
 	def get_country(self):
 		return self['country']
 
-	def get_duration(self, readable=False):
-		return datetime.timedelta(milliseconds=self['trackTimeMillis'])
-
-	def get_id(self):
-		return self['trackId']
-
-	def get_name(self, censored=False):
-		return self['trackNameCensored'] if censored else self['trackName']
-
-	def get_preview_url(self):
-		return self['previewUrl']
-
-	def get_price(self):
-		return self['trackPrice'], self['currency']
-
-	def get_release_date(self):
-		return datetime.datetime.strptime(
-			self['releaseDate'],
-			'%Y-%m-%dT%H:%M:%SZ' )
-
 	def get_track_number(self):
 		return self['discNumber'], self['trackNumber']
 
-	def get_view_url(self):
-		return self['trackViewUrl']
-
-	def grab_author(self):
-		return core.lookup(self['artistId'])
-
 	def grab_collection(self):
-		return core.lookup(self['collectionId'])
+		return itc.lookup(self['collectionId'])
 	
-	def is_explicit(self):
-		return 'not' not in self['trackExplicitness']
-
-class Collection(Item):
+class Collection(
+		itc.Item,
+		traits.Music,
+		traits.Purchasable):
 	
 	def __init__(self, response):
-		Item.__init__(self, response)
+		super().__init__(response, 'collection')
 
-	def get_artwork(self, resolution=256):
-		return self['artworkUrl60'].replace('60x60', '{0}x{0}'.format(resolution))
+	def get_country(self):
+		return self['country']
 
-	def get_description(self):
-		return self['description']
-
-	def get_name(self, censored=False):
-		return self['collectionNameCensored'] if censored else self['collectionName']
-
-	def get_preview_url(self):
-		return self['previewUrl']
-
-	def get_price(self):
-		return self['collectionPrice'] + self['currency']
-
-	def get_size(self):
-		return self['trackCount']
-
-	def get_view_url(self):
-		return self['collectionViewUrl']
-	
-	def grab_author(self):
-		return core.lookup(self['artistId'])
-
-	def is_explicit(self):
-		return 'not' not in self['collectionExplicitness']
-
-class Author(Item):
+class Author(
+		itc.Item,
+		traits.Music):
 		
 	def __init__(self, response):
-		Item.__init__(self, response)
-	
-	def get_name(self):
-		return self['artistName']
+		super().__init__(response, 'artist')
 
-	def get_id(self):
-		return self['artistId']
-
-	def get_view_url(self):
-		return self['artistLinkUrl']
-
-class Audiobook(Item):
+class Audiobook(itc.Item):
 
 	def __init__(self, response):
-		Item.__init__(self, response)
+		super().__init__(self, response, 'track')
 
-	def get_artwork(self, resolution=256):
-		return self['artworkUrl60'].replace('60x60', '{0}x{0}'.format(resolution))
-	
 	def get_description(self):
 		return self['description']
 
-	def get_preview_url(self):
-		return self['previewUrl']
-
-	def get_price(self):
-		return self['collectionPrice'] + self['currency']
-
 	def grab_author(self):
-		return core.lookup(self['artistId'])
+		return itc.lookup(self['artistId'])
 

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from . import content
+import itunesearch.content
 
 # Errors
 # ------
@@ -18,10 +18,10 @@ def wrapper_class(response):
 	wrap = 'wrapperType'
 	if wrap in response:
 		return {
-			'track' : content.Track,
-			'collection' : content.Collection,
-			'artist' : content.Author,
-			'audiobook' : content.Audiobook
+			'track' : itunesearch.content.Track,
+			'collection' : itunesearch.content.Collection,
+			'artist' : itunesearch.content.Author,
+			'audiobook' : itunesearch.content.Audiobook
 		}[response[wrap]](response)
 	else: # ... you are pretty much fucked
 		raise DefectiveResponseError
