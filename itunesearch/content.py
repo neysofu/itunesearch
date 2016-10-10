@@ -8,7 +8,6 @@ from itunesearch import traits
 
 class Track(
 		itc.Item,
-		traits.Music,
 		traits.Streamable,
 		traits.Purchasable ):
 
@@ -26,7 +25,6 @@ class Track(
 	
 class Collection(
 		itc.Item,
-		traits.Music,
 		traits.Purchasable ):
 	
 	def __init__(self, response):
@@ -36,13 +34,13 @@ class Collection(
 		return self['country']
 
 class Author(
-		itc.Item,
-		traits.Music ):
+		itc.Item ):	
 		
 	def __init__(self, response):
 		super().__init__(response, 'artist')
 
-class Audiobook(itc.Item):
+class Audiobook(
+		itc.Item ):
 
 	def __init__(self, response):
 		super().__init__(self, response, 'track')
