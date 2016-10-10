@@ -2,9 +2,7 @@
 
 iTunesearch is a mature and robust Python wrapper for the [infamous](https://medium.com/@ftxdri/the-itunes-api-the-epitome-of-bad-api-design-b83a9ac41132#.ka9dfyzd3) iTunes Search APIs. It features support for both `search` and `lookup` actions, comprehensive testing suits, and more.
 
-    git clone https://github.com/neysofu/itunesearch.git
-	cd itunesearch
-	python setup.py install
+    pip install itunesearch
 
 Behold, the power of iTunesearch:
 

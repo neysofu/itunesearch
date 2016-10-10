@@ -10,7 +10,7 @@ class Track(
 		itc.Item,
 		traits.Music,
 		traits.Streamable,
-		traits.Purchasable):
+		traits.Purchasable ):
 
 	def __init__(self, response):
 		super().__init__(response, 'track')
@@ -27,7 +27,7 @@ class Track(
 class Collection(
 		itc.Item,
 		traits.Music,
-		traits.Purchasable):
+		traits.Purchasable ):
 	
 	def __init__(self, response):
 		super().__init__(response, 'collection')
@@ -37,7 +37,7 @@ class Collection(
 
 class Author(
 		itc.Item,
-		traits.Music):
+		traits.Music ):
 		
 	def __init__(self, response):
 		super().__init__(response, 'artist')

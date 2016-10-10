@@ -28,6 +28,20 @@ class Item:
 			return self.response[item]
 		except KeyError:
 			raise itunesearch.util.DefectiveResponseError from None
+	
+	def get_genre(self):
+		return self['primaryGenreName']
+
+	def get_id(self):
+		return self['{0}Id'.format(self.entity)]
+
+	def get_name(self):
+		return self['{0}Name'.format(self.entity)]
+
+	def get_view_url(self):
+		return self.response.get(
+			'{0}ViewUrl'.format(self.entity),
+			'{0}LinkUrl'.format(self.entity) ) # WTF Apple
 
 # Public API
 # ----------
